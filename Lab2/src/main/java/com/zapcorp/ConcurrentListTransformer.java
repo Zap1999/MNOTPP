@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
@@ -28,6 +29,7 @@ public class ConcurrentListTransformer {
 
     private final int powerOfTwoThreads;
     private final List<Double> list;
+    private final Comparator<Double> comparator;
     private final Function<Double, Double> transformationFunction;
     private final int measurementIterations;
     private final String resultFilePath;
@@ -62,17 +64,24 @@ public class ConcurrentListTransformer {
 
     @SneakyThrows
     private double measureExecTime(int threads) {
+        final var transformationList = new ArrayList<>(list);
         final var threadList = new ArrayList<Thread>();
         for (int i = 0; i < threads; i++) {
             threadList.add(
-                    new Thread(new ListFunctionApplier(new ArrayList<>(list), transformationFunction, threads, i)));
+                    new Thread(new ListFunctionApplier(transformationList, transformationFunction, threads, i)));
         }
-
         final var start = System.nanoTime();
+
         threadList.forEach(Thread::start);
         for (Thread thread : threadList) {
             thread.join();
         }
+        final var min = transformationList.stream()
+                .min(comparator)
+                .orElse(Double.POSITIVE_INFINITY);
+        final var minIndex = transformationList.indexOf(min);
+        log.info("Min: {}; Index: {}", min, minIndex);
+
         final var finish = System.nanoTime();
         return (finish - start) / (float) threads;
     }

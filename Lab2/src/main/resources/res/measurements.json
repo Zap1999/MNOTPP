@@ -1,25 +1,25 @@
 [ {
   "threads" : 1,
-  "execTimeMillis" : 49.662872
+  "execTimeMillis" : 56.73809
 }, {
   "threads" : 2,
-  "execTimeMillis" : 11.640509125
+  "execTimeMillis" : 16.310654375
 }, {
   "threads" : 4,
-  "execTimeMillis" : 4.1666789375
+  "execTimeMillis" : 6.195680875
 }, {
   "threads" : 8,
-  "execTimeMillis" : 3.57491865625
+  "execTimeMillis" : 2.777707515625
 }, {
   "threads" : 16,
-  "execTimeMillis" : 2.51885125
+  "execTimeMillis" : 1.619950328125
 }, {
   "threads" : 32,
-  "execTimeMillis" : 2.68068475
+  "execTimeMillis" : 0.86353418359375
 }, {
   "threads" : 64,
-  "execTimeMillis" : 1.9747898515625
+  "execTimeMillis" : 0.51355323828125
 }, {
   "threads" : 128,
-  "execTimeMillis" : 1.8144529921875
+  "execTimeMillis" : 0.352504232421875
 } ]
