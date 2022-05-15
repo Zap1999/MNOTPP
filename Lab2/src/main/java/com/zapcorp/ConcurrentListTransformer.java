@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.Value;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
-
+@Slf4j
 @RequiredArgsConstructor
 public class ConcurrentListTransformer {
 
@@ -46,7 +47,8 @@ public class ConcurrentListTransformer {
     @SneakyThrows
     private ExecutionResult executeOp(int threads) {
         for (int i = 0; i < WARMUP_RUNS; i++) {
-            final var thread = new Thread(new ListFunctionApplier(list, transformationFunction, 1, 0));
+            final var thread =
+                    new Thread(new ListFunctionApplier(new ArrayList<>(list), transformationFunction, 1, 0));
             thread.start();
             thread.join();
         }
@@ -62,7 +64,8 @@ public class ConcurrentListTransformer {
     private double measureExecTime(int threads) {
         final var threadList = new ArrayList<Thread>();
         for (int i = 0; i < threads; i++) {
-            threadList.add(new Thread(new ListFunctionApplier(list, transformationFunction, threads, i)));
+            threadList.add(
+                    new Thread(new ListFunctionApplier(new ArrayList<>(list), transformationFunction, threads, i)));
         }
 
         final var start = System.nanoTime();
