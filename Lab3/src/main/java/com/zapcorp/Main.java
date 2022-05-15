@@ -13,6 +13,8 @@ public class Main {
 
     public static void main(final String... args) {
         final var iterativeStrategy = new IterativeParticleStrategy(ITERATIONS);
+        final var timedStrategy = new TimedParticleStrategy(EXECUTION_TIME_SECONDS * 1000, ITERATION_DELAY_MILLIS);
+
         new BrownianMotionEmulation(N, K, P, iterativeStrategy)
                 .run();
     }
