@@ -16,8 +16,9 @@ public class Main {
     private static final int MEASUREMENT_COUNT = 8;
     private static final String RESULT_FILE_PATH = "./res/measurements.json";
 
-    private static final Function<Integer, Double> FUNCTION =
-            (x) -> Math.sqrt(123 * Math.pow(x, -Math.sqrt(x)) / 68) + x / 3;
+    private static final Function<Double, Double> FUNCTION = (x) -> 1.0;
+//            (x) -> Math.sqrt(123 * Math.pow(x, -Math.sqrt(x)) / 68) + x / 3;
+
 
 
     public static void main(final String... args) {
