@@ -24,8 +24,8 @@ public class Main {
     public static void main(final String... args) {
         final var list = RandUtil.generateList(LIST_SIZE, ELEMENTS_ORIGIN, ELEMENTS_BOUND);
 
-        new OpExecutor(THREADS_NUM_POWER, FUNCTION, MEASUREMENT_COUNT, RESULT_FILE_PATH)
-                .runOp();
+        new ConcurrentListTransformer(THREADS_NUM_POWER, list, FUNCTION, MEASUREMENT_COUNT, RESULT_FILE_PATH)
+                .runTransformations();
         log.info("");
     }
 }
