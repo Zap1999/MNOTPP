@@ -9,6 +9,8 @@ import java.util.List;
 @ThreadSafe
 public final class Crystal {
 
+    private final Object movementLock = new Object();
+
     private final List<Integer> crystal;
 
 
@@ -19,23 +21,37 @@ public final class Crystal {
         this.crystal = Arrays.asList(arr);
     }
 
-    public synchronized int moveRight(int position) {
-        final var newPosition = position + 1 < crystal.size() ? position + 1 : position;
-        crystal.set(position, crystal.get(position) - 1);
-        crystal.set(newPosition, crystal.get(newPosition) + 1);
-        return newPosition;
+    public int moveRight(int position) {
+        synchronized (movementLock) {
+            final var newPosition = position + 1;
+            if (newPosition < crystal.size()) {
+                crystal.set(position, crystal.get(position) - 1);
+                crystal.set(newPosition, crystal.get(newPosition) + 1);
+                return newPosition;
+            } else {
+                return position;
+            }
+        }
     }
 
-    public synchronized int moveLeft(int position) {
-        final var newPosition = position - 1 >= 0 ? position - 1 : position;
-        crystal.set(position, crystal.get(position) - 1);
-        crystal.set(newPosition, crystal.get(newPosition) + 1);
-        return newPosition;
+    public int moveLeft(int position) {
+        synchronized (movementLock) {
+            final var newPosition = position - 1;
+            if (newPosition >= 0) {
+                crystal.set(position, crystal.get(position) - 1);
+                crystal.set(newPosition, crystal.get(newPosition) + 1);
+                return newPosition;
+            } else {
+                return position;
+            }
+        }
     }
 
-    public synchronized int[] getCrystalState() {
-        return crystal.stream()
-                .mapToInt(i -> i)
-                .toArray();
+    public int[] getCrystalState() {
+        synchronized (movementLock) {
+            return crystal.stream()
+                    .mapToInt(i -> i)
+                    .toArray();
+        }
     }
 }

@@ -1,5 +1,6 @@
-package com.zapcorp;
+package com.zapcorp.paricle;
 
+import com.zapcorp.Crystal;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Random;
@@ -21,7 +22,7 @@ public class TimedParticleStrategy implements ParticleStrategy {
     public void emulateParticle(float rightMoveProbability, Crystal crystal) {
         final var start = System.currentTimeMillis();
 
-        while(System.currentTimeMillis() - start < execTime) {
+        while (System.currentTimeMillis() - start < execTime) {
             if (random.nextFloat() < rightMoveProbability) {
                 position = crystal.moveRight(position);
             } else {

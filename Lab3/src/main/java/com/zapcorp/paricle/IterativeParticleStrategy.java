@@ -1,5 +1,6 @@
-package com.zapcorp;
+package com.zapcorp.paricle;
 
+import com.zapcorp.Crystal;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Random;

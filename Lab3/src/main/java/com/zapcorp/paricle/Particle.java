@@ -1,5 +1,7 @@
-package com.zapcorp;
+package com.zapcorp.paricle;
 
+import com.zapcorp.BrownianMotionEmulation;
+import com.zapcorp.Crystal;
 import lombok.RequiredArgsConstructor;
 
 

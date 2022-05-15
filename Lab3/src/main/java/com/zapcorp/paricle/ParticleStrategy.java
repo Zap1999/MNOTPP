@@ -1,4 +1,6 @@
-package com.zapcorp;
+package com.zapcorp.paricle;
+
+import com.zapcorp.Crystal;
 
 public interface ParticleStrategy {
 

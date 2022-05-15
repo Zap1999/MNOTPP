@@ -1,5 +1,8 @@
 package com.zapcorp;
 
+import com.zapcorp.paricle.IterativeParticleStrategy;
+import com.zapcorp.paricle.Particle;
+import com.zapcorp.paricle.TimedParticleStrategy;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import net.jcip.annotations.ThreadSafe;
@@ -18,15 +21,25 @@ public class BrownianMotionEmulation {
     private final Collection<Thread> particles;
 
 
-    public BrownianMotionEmulation(int crystalSize, int numParticles, float rightMoveProbability,
-                                   ParticleStrategy particleStrategy) {
+    public BrownianMotionEmulation(int crystalSize, int numParticles, float rightMoveProbability, int numIterations) {
         validate(crystalSize, numParticles);
 
         this.numParticles = numParticles;
         this.rightMoveProbability = rightMoveProbability;
         this.crystal = new Crystal(crystalSize, numParticles);
         this.emulationState = new EmulationState(numParticles);
-        this.particles = generateParticles(particleStrategy);
+        this.particles = generateIterativeParticles(numIterations);
+    }
+
+    public BrownianMotionEmulation(int crystalSize, int numParticles, float rightMoveProbability,
+                                   int executionTimeMillis, int iterationDelayMillis) {
+        validate(crystalSize, numParticles);
+
+        this.numParticles = numParticles;
+        this.rightMoveProbability = rightMoveProbability;
+        this.crystal = new Crystal(crystalSize, numParticles);
+        this.emulationState = new EmulationState(numParticles);
+        this.particles = generateTimedParticles(executionTimeMillis, iterationDelayMillis);
     }
 
     private void validate(int crystalSize, int particles) {
@@ -38,10 +51,20 @@ public class BrownianMotionEmulation {
         }
     }
 
-    private Collection<Thread> generateParticles(ParticleStrategy particleStrategy) {
+    private Collection<Thread> generateIterativeParticles(int numIterations) {
         final var arr = new Thread[numParticles];
         for (int i = 0; i < numParticles; i++) {
-            arr[i] = new Thread(new Particle(rightMoveProbability, crystal, particleStrategy, emulationState));
+            arr[i] = new Thread(new Particle(rightMoveProbability, crystal,
+                    new IterativeParticleStrategy(numIterations), emulationState));
+        }
+        return Arrays.asList(arr);
+    }
+
+    private Collection<Thread> generateTimedParticles(int executionTimeMillis, int iterationDelayMiliis) {
+        final var arr = new Thread[numParticles];
+        for (int i = 0; i < numParticles; i++) {
+            arr[i] = new Thread(new Particle(rightMoveProbability, crystal,
+                    new TimedParticleStrategy(executionTimeMillis, iterationDelayMiliis), emulationState));
         }
         return Arrays.asList(arr);
     }
@@ -61,19 +84,25 @@ public class BrownianMotionEmulation {
 
     @ThreadSafe
     @RequiredArgsConstructor
-    public static class EmulationState {
+    public final static class EmulationState {
+
+        private final Object finishedLock = new Object();
 
         private final int numParticles;
 
         private int finished = 0;
 
 
-        public synchronized void notifyFinished() {
-            finished++;
+        public void notifyFinished() {
+            synchronized (finishedLock) {
+                finished++;
+            }
         }
 
-        public synchronized boolean isFinished() {
-            return finished >= numParticles;
+        public boolean isFinished() {
+            synchronized (finishedLock) {
+                return finished >= numParticles;
+            }
         }
     }
 }
