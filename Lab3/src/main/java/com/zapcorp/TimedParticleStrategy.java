@@ -18,7 +18,7 @@ public class TimedParticleStrategy implements ParticleStrategy {
 
     @Override
     @SuppressWarnings("BusyWait")
-    public void startParticleEmulation(float rightMoveProbability, Crystal crystal) {
+    public void emulateParticle(float rightMoveProbability, Crystal crystal) {
         final var start = System.currentTimeMillis();
 
         while(System.currentTimeMillis() - start < execTime) {

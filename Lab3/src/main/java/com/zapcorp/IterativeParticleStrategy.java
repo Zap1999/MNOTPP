@@ -16,7 +16,7 @@ public class IterativeParticleStrategy implements ParticleStrategy {
 
 
     @Override
-    public void startParticleEmulation(float rightMoveProbability, Crystal crystal) {
+    public void emulateParticle(float rightMoveProbability, Crystal crystal) {
         for (int i = 0; i < numIterations; i++) {
             if (random.nextFloat() < rightMoveProbability) {
                 position = crystal.moveRight(position);
