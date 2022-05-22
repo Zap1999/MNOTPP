@@ -83,7 +83,8 @@ public class ConcurrentListTransformer {
         log.info("Min: {}; Index: {}", min, minIndex);
 
         final var finish = System.nanoTime();
-        return (finish - start) / (float) threads;
+
+        return finish - start;
     }
 
 
