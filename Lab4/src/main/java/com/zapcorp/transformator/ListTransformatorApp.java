@@ -1,4 +1,4 @@
-package com.zapcorp;
+package com.zapcorp.transformator;
 
 import com.zapcorp.transformator.util.RandUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -12,13 +12,13 @@ import java.util.Objects;
 import java.util.function.Function;
 
 @Slf4j
-public class Main {
+public class ListTransformatorApp {
 
     private static final int TWO = 2;
 
     private static final int THREADS_NUM_POWER = (int) Math.pow(TWO, 3);
     private static final int MEASUREMENT_COUNT = (int) Math.pow(TWO, 3);
-    private static final String RESULT_FILE_PATH = "./res/measurements.json";
+    private static final String RESULT_FILE_PATH = "lab2/res/measurements.json";
 
     private static final int LIST_SIZE = (int) Math.pow(TWO, 19);
     private static final double ELEMENTS_ORIGIN = Math.pow(TWO, 1);
@@ -45,7 +45,7 @@ public class Main {
         ).runTransformations();
 
         log.info("Transformations measurement finished successfully. It took {} seconds.",
-                (System.currentTimeMillis() - start)/ 1000);
+                (System.currentTimeMillis() - start) / 1000);
     }
 
     private static void clearFiles() throws IOException {

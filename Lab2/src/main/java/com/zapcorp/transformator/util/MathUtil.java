@@ -1,4 +1,4 @@
-package com.zapcorp.util;
+package com.zapcorp.transformator.util;
 
 import lombok.experimental.UtilityClass;
 
