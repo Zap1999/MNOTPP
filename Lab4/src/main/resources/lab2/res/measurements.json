@@ -1,34 +1,34 @@
 [
   {
-    "threads": 1,
-    "execTimeMillis": 62.773917375
+    "processes": 1,
+    "execTimeMillis": 600.641184
   },
   {
-    "threads": 2,
-    "execTimeMillis": 32.31871425
+    "processes": 2,
+    "execTimeMillis": 540.317448
   },
   {
-    "threads": 4,
-    "execTimeMillis": 22.638554
+    "processes": 4,
+    "execTimeMillis": 542.198596
   },
   {
-    "threads": 8,
-    "execTimeMillis": 25.1624495
+    "processes": 8,
+    "execTimeMillis": 529.1434
   },
   {
-    "threads": 16,
-    "execTimeMillis": 22.90734375
+    "processes": 16,
+    "execTimeMillis": 520.503852
   },
   {
-    "threads": 32,
-    "execTimeMillis": 29.3379495
+    "processes": 32,
+    "execTimeMillis": 514.731028
   },
   {
-    "threads": 64,
-    "execTimeMillis": 22.215335125
+    "processes": 64,
+    "execTimeMillis": 505.955716
   },
   {
-    "threads": 128,
-    "execTimeMillis": 39.597294625
+    "processes": 128,
+    "execTimeMillis": 518.649284
   }
 ]
