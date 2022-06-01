@@ -94,4 +94,4 @@ multi-process approach the results are similar - the only difference is that the
 We can see that multithreading dramatically increased the performance of the task, as it can be paralleled easily, but
 the best increase is reached with number of threads close to the number of cores of the machine (4/8). Also, it's
 demonstrated that threads overhead is reached near 128 threads, as the execution time starts to climb. With the
-multi-process approach the results are similar - the only difference is that the execution time is times bigger.
+multi-process approach the results aren't similar - the execution time for processes rises exponentially.

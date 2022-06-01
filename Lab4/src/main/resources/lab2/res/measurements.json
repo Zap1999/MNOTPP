@@ -1,34 +1,42 @@
 [
   {
     "processes": 1,
-    "execTimeMillis": 600.641184
+    "execTimeMillis": 558,
+    48777975
   },
   {
     "processes": 2,
-    "execTimeMillis": 540.317448
+    "execTimeMillis": 1059,
+    5635395
   },
   {
     "processes": 4,
-    "execTimeMillis": 542.198596
+    "execTimeMillis": 2107,
+    115614875
   },
   {
     "processes": 8,
-    "execTimeMillis": 529.1434
+    "execTimeMillis": 4150,
+    39971225
   },
   {
     "processes": 16,
-    "execTimeMillis": 520.503852
+    "execTimeMillis": 8133,
+    9169295
   },
   {
     "processes": 32,
-    "execTimeMillis": 514.731028
+    "execTimeMillis": 16325,
+    655362125
   },
   {
     "processes": 64,
-    "execTimeMillis": 505.955716
+    "execTimeMillis": 32694,
+    813720125
   },
   {
     "processes": 128,
-    "execTimeMillis": 518.649284
+    "execTimeMillis": 65959,
+    81632675
   }
 ]

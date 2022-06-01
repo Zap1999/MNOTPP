@@ -101,8 +101,7 @@ public class ConcurrentListTransformer {
         log.info("Minimum val is: " + min);
         Files.newBufferedWriter(Path.of(RESULT_FILE_PATH), StandardOpenOption.TRUNCATE_EXISTING).close();
 
-        // TODO: do not divide
-        return (finish - start) / (float) processes;
+        return finish - start;
     }
 
     @SneakyThrows
